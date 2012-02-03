@@ -111,7 +111,7 @@ public class PrairieInjector {
     reader.close();
 
     // define regex for matching Prairie TIFF filenames
-    Pattern p = Pattern.compile(".*_Cycle([\\d]+).*_Ch([\\d]+)_([\\d])+.*");
+    Pattern p = Pattern.compile(".*_Cycle([\\d]+).*_Ch([\\d]+)_([\\d]+).*");
 
     // set the TiffData elements to describe the planar ordering
     int tiffDataIndex = 0;
