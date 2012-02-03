@@ -37,6 +37,8 @@ package loci.apps.prairie;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import loci.common.RandomAccessInputStream;
 import loci.common.services.ServiceFactory;
@@ -108,14 +110,25 @@ public class PrairieInjector {
     // does not wipe out the metadata store
     reader.close();
 
+    // define regex for matching Prairie TIFF filenames
+    Pattern p = Pattern.compile(".*_Cycle([\\d]+).*_Ch([\\d]+)_([\\d])+.*");
+
     // set the TiffData elements to describe the planar ordering
     int tiffDataIndex = 0;
     Map<String, String> uuids = new HashMap<String, String>();
     for (String file : files) {
       if (!isTiff(file)) continue;
 
-      // TODO: populate these values from the current filename
-      int c = 0, z = 0, t = 0;
+      // extract CZT values from the current filename
+      Matcher m = p.matcher(file);
+      if (!m.matches() || m.groupCount() != 3) {
+        System.err.println("Warning: " + file + " does not conform to " +
+          "Prairie naming convention; skipping.");
+        continue;
+      }
+      int t = Integer.parseInt(m.group(1));
+      int c = Integer.parseInt(m.group(2));
+      int z = Integer.parseInt(m.group(3));
 
       meta.setTiffDataFirstC(new NonNegativeInteger(c), 0, tiffDataIndex);
       meta.setTiffDataFirstZ(new NonNegativeInteger(z), 0, tiffDataIndex);
