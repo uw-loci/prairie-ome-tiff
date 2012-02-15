@@ -49,6 +49,7 @@ import loci.formats.services.OMEXMLService;
 import loci.formats.tiff.TiffSaver;
 import ome.xml.model.primitives.NonNegativeInteger;
 
+
 /**
  * Command line tool to inject OME-XML into Prairie TIFF files.
  *
@@ -62,6 +63,7 @@ import ome.xml.model.primitives.NonNegativeInteger;
 public class PrairieInjector {
 
   public static void main(String[] args) throws Exception {
+args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\15Feb2012\\Test1\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif" };
 //    System.setProperty("plugins.dir", "C:\\Program Files (x86)\\ImageJ\\plugins");
 //    new ImageJ();
 //    System.out.println("Instance = " + IJ.getInstance());
@@ -99,6 +101,8 @@ public class PrairieInjector {
     // associate that store with the reader
     reader.setMetadataStore(meta);
 
+    //String[] myargs={"C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\8Feb2012\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif"};
+    
     // parse the Prairie dataset, populating the metadata store
     // does not read actual image planes
     String pathToPrairieXMLFile = args[0];
@@ -126,15 +130,15 @@ public class PrairieInjector {
           "Prairie naming convention; skipping.");
         continue;
       }
-      int t = Integer.parseInt(m.group(1));
-      int c = Integer.parseInt(m.group(2));
-      int z = Integer.parseInt(m.group(3));
+      int t = Integer.parseInt(m.group(1)) - 1;
+      int c = Integer.parseInt(m.group(2)) - 1;
+      int z = Integer.parseInt(m.group(3)) - 1;
 
       meta.setTiffDataFirstC(new NonNegativeInteger(c), 0, tiffDataIndex);
       meta.setTiffDataFirstZ(new NonNegativeInteger(z), 0, tiffDataIndex);
       meta.setTiffDataFirstT(new NonNegativeInteger(t), 0, tiffDataIndex);
       meta.setUUIDFileName(file, 0, tiffDataIndex);
-      String uuid = UUID.randomUUID().toString();
+      String uuid = "urn:uuid:" + UUID.randomUUID().toString();
       meta.setUUIDValue(uuid, 0, tiffDataIndex);
       uuids.put(file, uuid);
       tiffDataIndex++;
@@ -148,7 +152,7 @@ public class PrairieInjector {
 
       // write out the XML to the TIFF
       String xml = omexmlService.getOMEXML(meta);
-      XMLTools.validateXML(xml); // TEMPORARY to make sure it is correct
+      //XMLTools.validateXML(xml); 							// TEMPORARY to make sure it is correct
       RandomAccessInputStream in = new RandomAccessInputStream(file);
       TiffSaver tiffSaver = new TiffSaver(file);
       tiffSaver.overwriteComment(in, xml);
