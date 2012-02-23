@@ -42,9 +42,8 @@ import java.util.regex.Pattern;
 
 import loci.common.RandomAccessInputStream;
 import loci.common.services.ServiceFactory;
-import loci.common.xml.XMLTools;
 import loci.formats.ImageReader;
-import loci.formats.meta.IMetadata;
+import loci.formats.ome.OMEXMLMetadata;
 import loci.formats.services.OMEXMLService;
 import loci.formats.tiff.TiffSaver;
 import ome.xml.model.primitives.NonNegativeInteger;
@@ -63,7 +62,7 @@ import ome.xml.model.primitives.NonNegativeInteger;
 public class PrairieInjector {
 
   public static void main(String[] args) throws Exception {
-args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\15Feb2012\\Test1\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif" };
+args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\23Feb2012\\Test1\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif" };
 //    System.setProperty("plugins.dir", "C:\\Program Files (x86)\\ImageJ\\plugins");
 //    new ImageJ();
 //    System.out.println("Instance = " + IJ.getInstance());
@@ -96,12 +95,12 @@ args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFile
     OMEXMLService omexmlService = serviceFactory.getInstance(OMEXMLService.class);
 
     // create a metadata store, where info is placed
-    IMetadata meta = omexmlService.createOMEXMLMetadata();
+    OMEXMLMetadata meta = omexmlService.createOMEXMLMetadata();
 
     // associate that store with the reader
     reader.setMetadataStore(meta);
 
-    //String[] myargs={"C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\8Feb2012\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif"};
+    //String[] myargs={"C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\20Feb2012\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif"};
     
     // parse the Prairie dataset, populating the metadata store
     // does not read actual image planes
@@ -136,7 +135,7 @@ args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFile
 
       meta.setTiffDataFirstC(new NonNegativeInteger(c), 0, tiffDataIndex);
       meta.setTiffDataFirstZ(new NonNegativeInteger(z), 0, tiffDataIndex);
-      meta.setTiffDataFirstT(new NonNegativeInteger(t), 0, tiffDataIndex);
+      meta.setTiffDataFirstT(new NonNegativeInteger(t), 0, tiffDataIndex);  
       meta.setUUIDFileName(file, 0, tiffDataIndex);
       String uuid = "urn:uuid:" + UUID.randomUUID().toString();
       meta.setUUIDValue(uuid, 0, tiffDataIndex);
@@ -150,6 +149,9 @@ args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFile
       // set this TIFF file's UUID to the correct one
       meta.setUUID(uuids.get(file));
 
+      // remove BinData element
+      omexmlService.removeBinData(meta);
+      
       // write out the XML to the TIFF
       String xml = omexmlService.getOMEXML(meta);
       //XMLTools.validateXML(xml); 							// TEMPORARY to make sure it is correct

@@ -36,6 +36,12 @@
       <artifactId>scifio</artifactId>
       <version>${bio-formats.version}</version>
     </dependency>
+    <dependency>
+      <groupId>${bio-formats.groupId}</groupId>
+      <artifactId>bio-formats</artifactId>
+      <version>${bio-formats.version}</version>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 
   <build>
