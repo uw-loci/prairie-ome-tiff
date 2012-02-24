@@ -34,6 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package loci.apps.prairie;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -62,7 +63,7 @@ import ome.xml.model.primitives.NonNegativeInteger;
 public class PrairieInjector {
 
   public static void main(String[] args) throws Exception {
-args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\23Feb2012\\Test1\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif" };
+args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\24Feb2012\\Test2\\TSeries-09022010-170_Cycle001_CurrentSettings_Ch1_000001.tif"};//\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif" };
 //    System.setProperty("plugins.dir", "C:\\Program Files (x86)\\ImageJ\\plugins");
 //    new ImageJ();
 //    System.out.println("Instance = " + IJ.getInstance());
@@ -136,7 +137,10 @@ args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFile
       meta.setTiffDataFirstC(new NonNegativeInteger(c), 0, tiffDataIndex);
       meta.setTiffDataFirstZ(new NonNegativeInteger(z), 0, tiffDataIndex);
       meta.setTiffDataFirstT(new NonNegativeInteger(t), 0, tiffDataIndex);  
-      meta.setUUIDFileName(file, 0, tiffDataIndex);
+      
+      File f = new File(file);
+      String fileName = f.getName();
+      meta.setUUIDFileName(fileName, 0, tiffDataIndex);
       String uuid = "urn:uuid:" + UUID.randomUUID().toString();
       meta.setUUIDValue(uuid, 0, tiffDataIndex);
       uuids.put(file, uuid);
