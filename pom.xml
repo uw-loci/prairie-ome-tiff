@@ -27,19 +27,19 @@
 
   <dependencies>
     <dependency>
-      <groupId>${bio-formats.groupId}</groupId>
+      <groupId>${scifio.groupId}</groupId>
       <artifactId>loci-common</artifactId>
-      <version>${bio-formats.version}</version>
+      <version>${scifio.version}</version>
     </dependency>
     <dependency>
-      <groupId>${bio-formats.groupId}</groupId>
+      <groupId>${scifio.groupId}</groupId>
       <artifactId>scifio</artifactId>
-      <version>${bio-formats.version}</version>
+      <version>${scifio.version}</version>
     </dependency>
     <dependency>
-      <groupId>${bio-formats.groupId}</groupId>
+      <groupId>${scifio.groupId}</groupId>
       <artifactId>bio-formats</artifactId>
-      <version>${bio-formats.version}</version>
+      <version>${scifio.version}</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
