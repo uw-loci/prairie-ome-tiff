@@ -63,33 +63,6 @@ import ome.xml.model.primitives.NonNegativeInteger;
 public class PrairieInjector {
 
   public static void main(String[] args) throws Exception {
-args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\24Feb2012\\Test2\\TSeries-09022010-170_Cycle001_CurrentSettings_Ch1_000001.tif"};//\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif" };
-//    System.setProperty("plugins.dir", "C:\\Program Files (x86)\\ImageJ\\plugins");
-//    new ImageJ();
-//    System.out.println("Instance = " + IJ.getInstance());
-
-//    String infile;
-//    String outfile;
-
-//    BufferedReader reader;
-//    reader = new BufferedReader(new InputStreamReader(System.in));
-//
-//    System.out.println("What is name of input file? ");
-//    infile = reader.readLine();
-//
-//    System.out.println("What is name of output file? ");
-//    outfile = reader.readLine();
-
-        //String[] myArgs = {infile, outfile};
-//      "C:\\users\\Kristin\\Documents\\Dropbox\\LOCI\\DataFromJoe\\TIFF-001\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif",
-//      "C:\\users\\Kristin\\Documents\\Dropbox\\LOCI\\DataFromJoe\\TIFF-001\\TestConvert.ome.tif"};
-//    ImageInfo.main(myArgs);
-
-
-    // LAUNCH PROGRAM WITH:
-    // java -cp loci_tools.jar;prairie-injector.jar loci.apps.prairie.Injector myPrairieData.xml
-
-//    JFileChooser chooser = new JFileChooser();
     ImageReader reader = new ImageReader();
 
     ServiceFactory serviceFactory = new ServiceFactory();
@@ -100,8 +73,6 @@ args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFile
 
     // associate that store with the reader
     reader.setMetadataStore(meta);
-
-    //String[] myargs={"C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFiles\\20Feb2012\\TIFF-001_Cycle001_CurrentSettings_Ch1_000001.tif"};
     
     // parse the Prairie dataset, populating the metadata store
     // does not read actual image planes
@@ -158,21 +129,11 @@ args = new String[] { "C:\\Users\\Kristin\\Documents\\Dropbox\\LOCI\\TestingFile
       
       // write out the XML to the TIFF
       String xml = omexmlService.getOMEXML(meta);
-      //XMLTools.validateXML(xml); 							// TEMPORARY to make sure it is correct
       RandomAccessInputStream in = new RandomAccessInputStream(file);
       TiffSaver tiffSaver = new TiffSaver(file);
       tiffSaver.overwriteComment(in, xml);
       in.close();
     }
-
-
-//    JFileChooser chooser = GUITools.buildFileChooser(reader, true);
-//    int returnVal = chooser.showOpenDialog(null);
-
-//    ImageConverter.main(myArgs);
-
-//    PrairieReader r = new PrairieReader();
-//    r.setId(myFile);
   }
 
   private static boolean isTiff(String file) {
