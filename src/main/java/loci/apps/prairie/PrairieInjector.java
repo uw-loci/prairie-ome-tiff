@@ -65,12 +65,15 @@ public class PrairieInjector {
   public static void main(String[] args) throws Exception {
     ImageReader reader = new ImageReader();
 
+    // enable injection of original metadata as structured annotations
+    reader.setOriginalMetadataPopulated(true);
+    
     ServiceFactory serviceFactory = new ServiceFactory();
     OMEXMLService omexmlService = serviceFactory.getInstance(OMEXMLService.class);
 
     // create a metadata store, where info is placed
     OMEXMLMetadata meta = omexmlService.createOMEXMLMetadata();
-
+    
     // associate that store with the reader
     reader.setMetadataStore(meta);
     
