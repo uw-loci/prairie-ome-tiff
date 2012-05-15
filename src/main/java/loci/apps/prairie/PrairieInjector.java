@@ -73,6 +73,7 @@ public class PrairieInjector {
 
     // create a metadata store, where info is placed
     OMEXMLMetadata meta = omexmlService.createOMEXMLMetadata();
+    OMEXMLMetadata meta2 = omexmlService.createOMEXMLMetadata();
     
     // associate that store with the reader
     reader.setMetadataStore(meta);
@@ -93,6 +94,8 @@ public class PrairieInjector {
 
     // set the TiffData elements to describe the planar ordering
     int tiffDataIndex = 0;
+    String masterFile = null;
+    String masterUuid = null;
     Map<String, String> uuids = new HashMap<String, String>();
     for (String file : files) {
       if (!isTiff(file)) continue;
@@ -104,10 +107,11 @@ public class PrairieInjector {
           "Prairie naming convention; skipping.");
         continue;
       }
+      
       int t = Integer.parseInt(m.group(1)) - 1;
       int c = Integer.parseInt(m.group(2)) - 1;
       int z = Integer.parseInt(m.group(3)) - 1;
-
+  
       meta.setTiffDataFirstC(new NonNegativeInteger(c), 0, tiffDataIndex);
       meta.setTiffDataFirstZ(new NonNegativeInteger(z), 0, tiffDataIndex);
       meta.setTiffDataFirstT(new NonNegativeInteger(t), 0, tiffDataIndex);  
@@ -118,9 +122,21 @@ public class PrairieInjector {
       String uuid = "urn:uuid:" + UUID.randomUUID().toString();
       meta.setUUIDValue(uuid, 0, tiffDataIndex);
       uuids.put(file, uuid);
+
+      // record master file name and its uuid
+      if (tiffDataIndex==0){
+        masterFile = file;
+        masterUuid = uuid;
+      }
+      
       tiffDataIndex++;
     }
-
+    
+    // set master file information for BinaryOnly files
+    meta2.setBinaryOnlyMetadataFile(masterFile);
+    meta2.setBinaryOnlyUUID(masterUuid);
+    
+    int i=0;
     for (String file : files) {
       if (!isTiff(file)) continue;
 
@@ -129,13 +145,18 @@ public class PrairieInjector {
 
       // remove BinData element
       omexmlService.removeBinData(meta);
-      
+
       // write out the XML to the TIFF
-      String xml = omexmlService.getOMEXML(meta);
+      String xml = omexmlService.getOMEXML(meta2);
+      // write full metadata for 1st file and every 10th file after that
+      if ((i%10)==0) xml = omexmlService.getOMEXML(meta);
+      
       RandomAccessInputStream in = new RandomAccessInputStream(file);
       TiffSaver tiffSaver = new TiffSaver(file);
       tiffSaver.overwriteComment(in, xml);
       in.close();
+      
+      i++;
     }
   }
 
