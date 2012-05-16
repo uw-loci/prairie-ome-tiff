@@ -125,7 +125,7 @@ public class PrairieInjector {
 
       // record master file name and its uuid
       if (tiffDataIndex==0){
-        masterFile = file;
+        masterFile = f.getName();
         masterUuid = uuid;
       }
       
