@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>loci</groupId>
 		<artifactId>pom-loci</artifactId>
-		<version>1.0</version>
+		<version>1.13</version>
 	</parent>
 
 	<artifactId>prairie-ome-tiff</artifactId>
@@ -28,19 +28,19 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${scifio.groupId}</groupId>
+			<groupId>${bio-formats.groupId}</groupId>
 			<artifactId>loci-common</artifactId>
-			<version>${scifio.version}</version>
+			<version>${bio-formats.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>${scifio.groupId}</groupId>
+			<groupId>${bio-formats.groupId}</groupId>
 			<artifactId>scifio</artifactId>
-			<version>${scifio.version}</version>
+			<version>${bio-formats.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>${scifio.groupId}</groupId>
+			<groupId>${bio-formats.groupId}</groupId>
 			<artifactId>bio-formats</artifactId>
-			<version>${scifio.version}</version>
+			<version>${bio-formats.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
