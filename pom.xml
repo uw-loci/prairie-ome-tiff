@@ -85,7 +85,7 @@
 
 	<developers>
 		<developer>
-			<id>briney</id>
+			<id>kbriney</id>
 			<name>Kristin Briney</name>
 			<url>http://loci.wisc.edu/people/kristin-briney</url>
 			<organization>UW-Madison LOCI</organization>
@@ -96,7 +96,7 @@
 			<timezone>-6</timezone>
 		</developer>
 		<developer>
-			<id>curtis</id>
+			<id>ctrueden</id>
 			<name>Curtis Rueden</name>
 			<email>ctrueden@wisc.edu</email>
 			<url>http://loci.wisc.edu/people/curtis-rueden</url>
