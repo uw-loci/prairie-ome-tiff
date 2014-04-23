@@ -35,12 +35,16 @@
 		</dependency>
 		<dependency>
 			<groupId>ome</groupId>
+			<artifactId>formats-bsd</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ome</groupId>
 			<artifactId>formats-common</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>ome</groupId>
-			<artifactId>bio-formats-gpl</artifactId>
+			<artifactId>formats-gpl</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
