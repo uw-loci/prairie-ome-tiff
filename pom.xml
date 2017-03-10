@@ -18,7 +18,6 @@
 	<name>Prairie OME-TIFF</name>
 	<description>Command line tool to inject OME-XML into Prairie TIFF files.</description>
 	<inceptionYear>2012</inceptionYear>
-
 	<licenses>
 		<license>
 			<name>GNU General Public License v2+</name>
@@ -27,6 +26,46 @@
 		</license>
 	</licenses>
 
+	<developers>
+		<developer>
+			<id>kbriney</id>
+			<name>Kristin Briney</name>
+			<url>http://loci.wisc.edu/people/kristin-briney</url>
+			<organization>UW-Madison LOCI</organization>
+			<organizationUrl>http://loci.wisc.edu/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>-6</timezone>
+		</developer>
+		<developer>
+			<id>ctrueden</id>
+			<name>Curtis Rueden</name>
+			<email>ctrueden@wisc.edu</email>
+			<url>http://loci.wisc.edu/people/curtis-rueden</url>
+			<organization>UW-Madison LOCI</organization>
+			<organizationUrl>http://loci.wisc.edu/</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>-6</timezone>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/uw-loci/prairie-ome-tiff</connection>
+		<developerConnection>scm:git:git@github.com:uw-loci/prairie-ome-tiff</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/uw-loci/prairie-ome-tiff</url>
+	</scm>
+
+	<repositories>
+		<repository>
+			<id>imagej.public</id>
+			<url>http://maven.imagej.net/content/groups/public</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -94,46 +133,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<developers>
-		<developer>
-			<id>kbriney</id>
-			<name>Kristin Briney</name>
-			<url>http://loci.wisc.edu/people/kristin-briney</url>
-			<organization>UW-Madison LOCI</organization>
-			<organizationUrl>http://loci.wisc.edu/</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>-6</timezone>
-		</developer>
-		<developer>
-			<id>ctrueden</id>
-			<name>Curtis Rueden</name>
-			<email>ctrueden@wisc.edu</email>
-			<url>http://loci.wisc.edu/people/curtis-rueden</url>
-			<organization>UW-Madison LOCI</organization>
-			<organizationUrl>http://loci.wisc.edu/</organizationUrl>
-			<roles>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-			<timezone>-6</timezone>
-		</developer>
-	</developers>
-
-	<scm>
-		<connection>scm:git:git://github.com/uw-loci/prairie-ome-tiff</connection>
-		<developerConnection>scm:git:git@github.com:uw-loci/prairie-ome-tiff</developerConnection>
-		<tag>HEAD</tag>
-		<url>https://github.com/uw-loci/prairie-ome-tiff</url>
-	</scm>
-
-	<repositories>
-		<repository>
-			<id>imagej.public</id>
-			<url>http://maven.imagej.net/content/groups/public</url>
-		</repository>
-	</repositories>
-
 </project>
