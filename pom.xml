@@ -85,6 +85,9 @@
 Wisconsin-Madison.
 1. Redistributions of source code must retain the above copyright notice,</license.copyrightOwners>
 		<license.projectName>Prairie OME-TIFF command line tool to inject OME-XML into Prairie TIFF files.</license.projectName>
+
+		<!-- NB: Deploy releases to the ImageJ Maven repository. -->
+		<releaseProfiles>deploy-to-imagej</releaseProfiles>
 	</properties>
 
 	<repositories>
